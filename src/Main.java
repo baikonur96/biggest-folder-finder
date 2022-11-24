@@ -9,6 +9,13 @@ public class Main {
 
     public static void main(String[] args) {
 
+        for (int i = 0; i < args.length; i++){
+            System.out.println(i + " => " + args[i]);
+        }
+        System.exit(0);
+
+        long sizeLimit = 50 *1024;
+
 //        MyThread thread = new MyThread(1);
 //        MyThread thread2 = new MyThread(2);
 //
@@ -16,7 +23,7 @@ public class Main {
 //        thread2.start();
         String folderPath = "C:\\Users\\Diagnost\\Desktop";
         File file = new File(folderPath);
-        Node root = new Node(file);
+        Node root = new Node(file, sizeLimit);
         long start = System.currentTimeMillis();
 
         FolderSizeCalculator calculator = new FolderSizeCalculator(root);

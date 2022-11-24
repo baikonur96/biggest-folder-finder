@@ -8,8 +8,8 @@ public class SizeCalculator {
             return "0";
         }
         int power =  (int) (Math.log(size) / Math.log(1024));
-        double value = size / Math.pow(1024, power);
-        double roundedValue = Math.round(value * 100) / 100;
+        double value = ((double)size) / Math.pow(1024., power);
+        double roundedValue = Math.round(value * 100) / 100.;
         return roundedValue + sizeName[power];
     }
 

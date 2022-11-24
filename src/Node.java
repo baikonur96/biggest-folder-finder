@@ -1,14 +1,26 @@
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Node {
 
 
     private File folder;
     private ArrayList<Node> children;
-
     private long size;
+
+    public long getLimit() {
+        return limit;
+    }
+
+    private long limit;
+
+    private int level;
+    private void setLevel(int level) {
+        this.level = level;
+    }
+    public int getLevel() {
+        return level;
+    }
 
     public long getSize() {
         return this.size;
@@ -18,7 +30,8 @@ public class Node {
         this.size = size;
     }
 
-    public Node(File folder){
+    public Node(File folder, long limit){
+        this.limit = limit;
         this.folder = folder;
         children = new ArrayList<>();
     }
@@ -27,6 +40,7 @@ public class Node {
         return this.folder;
     }
     public void addChild(Node node){
+        node.setLevel(level + 1);
         children.add(node);
     }
 
@@ -40,7 +54,10 @@ public class Node {
         builder.append(folder.getName() + " - " + size + "\n");
         for (Node child : children)
         {
-            builder.append("  " + child.toString());
+            if (child.getSize() < limit){
+                continue;
+            }
+            builder.append( "   ".repeat(level + 1) + child.toString());
         }
         return builder.toString();
     }
